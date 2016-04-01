@@ -2,6 +2,7 @@ package editor;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -27,35 +28,38 @@ import javax.swing.JTextField;
 
 public class MapEditor extends JPanel implements MouseListener, ActionListener, MouseMotionListener {
 
+	final int maxHeight = 100;
+	final static int tileSize = 100;
+	
 	int[][] starterMap = 
 		{
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+				{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
 		};
 	
 	int[][] map;
-	HashMap<Integer, String> key;
+	HashMap<Integer, Image> key;
 	JTextField text = new JTextField(8);
 	ImageIcon selectedTile;
 	int selTile;
@@ -63,7 +67,7 @@ public class MapEditor extends JPanel implements MouseListener, ActionListener, 
 	public MapEditor() {
 		
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("src/map"));
+			BufferedReader br = new BufferedReader(new FileReader("map"));
 			List<List<Integer>> listMap = new ArrayList<List<Integer>>();
 			while(true) {
 				String line = br.readLine();
@@ -101,59 +105,26 @@ public class MapEditor extends JPanel implements MouseListener, ActionListener, 
 		return ret;
 	}
 	
-	public static HashMap<Integer,  String> getKey() {
-		HashMap<Integer, String> key = new HashMap<Integer, String>();
-		key.put(0, "src/res/grass.png");
-		key.put(1, "src/res/rock.png");
-		key.put(2, "src/res/G2R.png");
-		key.put(3, "src/res/R2G.png");
-		key.put(4, "src/res/G2R2.png");
-		key.put(5, "src/res/R2G2.png");
-		key.put(6, "src/res/GRCorner1.png");
-		key.put(7, "src/res/GRCorner2.png");
-		key.put(8, "src/res/GRCorner3.png");
-		key.put(9, "src/res/GRCorner4.png");
+	public static HashMap<Integer, Image> getKey() {
+		HashMap<Integer, Image> key = new HashMap<Integer, Image>();
+		key.put(0, new ImageIcon("images/1.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT));
+		key.put(1, (new ImageIcon("images/2.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
+		key.put(2, (new ImageIcon("images/3.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
+		key.put(3, (new ImageIcon("images/4.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
+		key.put(4, (new ImageIcon("images/5.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
+		key.put(5, (new ImageIcon("images/6.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
+		key.put(6, (new ImageIcon("images/7.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
+		key.put(7, (new ImageIcon("images/8.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
+		key.put(8, (new ImageIcon("images/9.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
+		key.put(9, (new ImageIcon("images/10.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
 		
-		key.put(10, "src/res/GR2Corner1.png");
-		key.put(11, "src/res/GR2Corner2.png");
-		key.put(12, "src/res/GR2Corner3.png");
-		key.put(13, "src/res/GR2Corner4.png");
-		key.put(14,  "src/res/grassWithRock.png");
-		key.put(15,  "src/res/rockWithRock.png");
-		
-		key.put(20, "src/res/pave1.png");
-		key.put(21, "src/res/pave2.png");
-		key.put(22, "src/res/pave3.png");
-		key.put(23, "src/res/pave4.png");
-		key.put(24, "src/res/paveEdge1.png");
-		key.put(25, "src/res/paveEdge2.png");
-		key.put(26, "src/res/paveEdge3.png");
-		key.put(27, "src/res/paveEdge4.png");
-		key.put(28, "src/res/paveCorner1.png");
-		key.put(29, "src/res/paveCorner2.png");
-		key.put(30, "src/res/paveCorner3.png");
-		key.put(31, "src/res/paveCorner4.png");
-		key.put(32, "src/res/paveCorner5.png");
-		key.put(33, "src/res/paveCorner6.png");
-		key.put(34, "src/res/paveCorner7.png");
-		key.put(35, "src/res/paveCorner8.png");
-		key.put(36, "src/res/pave5.png");
-		
-		key.put(40, "src/res/cliff1.png");
-		key.put(41, "src/res/cliff2.png");
-		
-		key.put(42, "src/res/cliffSide1.png");
-		key.put(43, "src/res/cliffSide2.png");
-		key.put(44, "src/res/cliffSide3.png");
-		key.put(45, "src/res/cliffSide4.png");
-		key.put(46, "src/res/cliffTop1.png");
-		key.put(47, "src/res/cliffTop2.png");
-		key.put(48, "src/res/cliffCorner1.png");
-		key.put(49, "src/res/cliffCorner2.png");
-		key.put(50, "src/res/cliffCorner3.png");
-		key.put(51, "src/res/cliffCorner4.png");
-		key.put(52, "src/res/cliffRock1.png");
-		key.put(53, "src/res/cliffRock2.png");
+		key.put(10, (new ImageIcon("images/11.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
+		key.put(11, (new ImageIcon("images/12.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
+		key.put(12, (new ImageIcon("images/13.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
+		key.put(13, (new ImageIcon("images/14.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
+		key.put(14, (new ImageIcon("images/15.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
+		key.put(15, (new ImageIcon("images/16.png").getImage().getScaledInstance(tileSize, tileSize, Image.SCALE_DEFAULT)));
+	
 		
 		return key;
 	}
@@ -172,9 +143,7 @@ public class MapEditor extends JPanel implements MouseListener, ActionListener, 
 	public void paintComponent(Graphics g) {
 		for(int x = 0; x < map[0].length - 1; x++) {
 			for(int y = 0; y < map.length - 1; y++) {
-
-				ImageIcon ii = new ImageIcon(key.get(map[y][x]));
-				g.drawImage(ii.getImage(), x*40, y*40, this);
+				g.drawImage(key.get(map[y][x]), x*tileSize, y*tileSize, this);
 			}
 		}
 		if(selectedTile != null) {
@@ -189,8 +158,8 @@ public class MapEditor extends JPanel implements MouseListener, ActionListener, 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
-		int x = (int) (MouseInfo.getPointerInfo().getLocation().getX() - (int) this.getLocationOnScreen().getX())/40;
-		int y = (int) (MouseInfo.getPointerInfo().getLocation().getY() - (int) this.getLocationOnScreen().getY())/40;
+		int x = (int) (MouseInfo.getPointerInfo().getLocation().getX() - (int) this.getLocationOnScreen().getX())/tileSize;
+		int y = (int) (MouseInfo.getPointerInfo().getLocation().getY() - (int) this.getLocationOnScreen().getY())/tileSize;        
 		map[y][x] = selTile;
 		repaint();
 	}
@@ -225,7 +194,7 @@ public class MapEditor extends JPanel implements MouseListener, ActionListener, 
 		if(e.getSource().equals(text)) {
 			if(text.getText().equals("save")) {
 				try {
-				 PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("src/map")));
+				 PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("map")));
 				 for(int i = 0; i < map.length; i++) {
 					 for(int y = 0; y < map[i].length; y++) {
 					 out.print(map[i][y] + " ");

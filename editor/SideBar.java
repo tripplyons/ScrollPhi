@@ -1,6 +1,7 @@
 package editor;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,11 +11,11 @@ import javax.swing.JScrollPane;
 
 public class SideBar extends JScrollPane {
 
-	ArrayList<String> images = new ArrayList<String>();
+	ArrayList<Image> images = new ArrayList<Image>();
 
 	public SideBar() {
 
-		HashMap<Integer, String> key = MapEditor.getKey();
+		HashMap<Integer, Image> key = MapEditor.getKey();
 		for(int i = 0; i < key.size(); i++) {
 			images.add(key.get(i));
 		}
