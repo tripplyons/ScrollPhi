@@ -31,27 +31,27 @@ public class Sprite {
 		getImageDimensions();
 	}
 
-	public Image getImage() {
+	protected Image getImage() {
 		return image;
 	}
 
-	public int getX() {
+	protected int getX() {
 		return x;
 	}
 
-	public int getY() {
+	protected int getY() {
 		return y;
 	}
 
-	public boolean isVisible() {
+	protected boolean isVisible() {
 		return vis;
 	}
 
-	public void setVisible(Boolean visible) {
+	protected void setVisible(Boolean visible) {
 		vis = visible;
 	}
 
-	public Rectangle getBounds() {
+	protected Rectangle getBounds() {
 		return new Rectangle(x, y, width, height);
 	}
 }
