@@ -7,14 +7,14 @@ import javax.swing.ImageIcon;
 
 public class Sprite {
 
-	protected int x;
-	protected int y;
+	protected float x;
+	protected float y;
 	protected int width;
 	protected int height;
 	protected boolean vis;
 	protected Image image;
 
-	public Sprite(int x, int y) {
+	public Sprite(float x, float y) {
 		this.x = x;
 		this.y = y;
 		vis = true;
@@ -35,11 +35,11 @@ public class Sprite {
 		return image;
 	}
 
-	protected int getX() {
+	protected float getX() {
 		return x;
 	}
 
-	protected int getY() {
+	protected float getY() {
 		return y;
 	}
 
@@ -52,6 +52,6 @@ public class Sprite {
 	}
 
 	protected Rectangle getBounds() {
-		return new Rectangle(x, y, width, height);
+		return new Rectangle(Math.round(x), Math.round(y), width, height);
 	}
 }

@@ -5,7 +5,7 @@ import java.awt.Point;
 import java.awt.image.ImageObserver;
 
 public class ScrollingSprite extends Sprite {
-	public ScrollingSprite(int x, int y) {
+	public ScrollingSprite(float x, float y) {
 		super(x, y);
 	}
 	
