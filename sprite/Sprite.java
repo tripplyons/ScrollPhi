@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 
 public class Sprite {
 
-	protected float x;
+	public float x;
 	protected float y;
 	protected int width;
 	protected int height;

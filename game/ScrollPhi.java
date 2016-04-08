@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
@@ -20,7 +21,7 @@ import javax.swing.JPanel;
 public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 	
 	int[][] map = new int[1000][1000];
-	static Player p;
+	static Player player;
 	HashMap<Integer, Image> imageKey = new HashMap<Integer, Image>();
 	int TILESIZE = 50;
 	static JFrame frame;
@@ -30,7 +31,7 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 	public static void main(String[] args) {
 		frame = new JFrame();
 		ScrollPhi s = new ScrollPhi();
-		p = new Player(50f, 50f);
+		player = new Player(50f, 50f);
 		frame.add(s);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -39,11 +40,13 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 		frame.addKeyListener(s);
 		frame.addMouseListener(s);
 		frame.setVisible(true);
-		
 	}
 	
 	public ScrollPhi() {
 		loadMap();
+		for(int i = 0; i < map.length; i++) {
+		System.out.println(Arrays.toString(map[i]));
+		}
 	}
 	
 	public void loadMap() {
@@ -51,15 +54,17 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 			BufferedReader br = new BufferedReader(new FileReader("map"));
 			
 			for(int i = 0; br.ready(); i++) {
-				StringTokenizer s = new StringTokenizer(br.readLine());
+				String line = br.readLine();
+				StringTokenizer s = new StringTokenizer(line);
+				System.out.println("My line is " + line);
 				for(int j = 0; s.hasMoreTokens(); j++) {
 					map[i][j] = Integer.parseInt(s.nextToken());
 				}
 			}
+			br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		for(int i = 0; i < 18; i++) {
 			imageKey.put(i, new ImageIcon(Integer.toString(i)).getImage());
 		}
@@ -69,6 +74,7 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 	public void paintComponent(Graphics g) {
 		paintMap(g);
 		paintSprites(g);
+		g.drawImage(new ImageIcon("Foot.png").getImage(),(int)  player.x, (int) player.y, this);
 	}
 	
 	public void paintMap(Graphics g) {
