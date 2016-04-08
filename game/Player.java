@@ -3,14 +3,10 @@ package game;
 import sprite.Sprite;
 
 public class Player extends Sprite {
-
-	public Player(float x, float y) {
-		super(x, y);
-		// TODO Auto-generated constructor stub
+	int density;
+	int bounciness;
+	int stickitude;
+	public Player(float x, float y, boolean scrolling) {
+		super(x, y, scrolling);
 	}
-	double density;
-	double bounciness;
-	double stickitude;
-	
-	
 }
