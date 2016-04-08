@@ -7,15 +7,15 @@ public class Player extends Sprite {
 	public float x;
 	public float y;
 	
+	int density;
+	int bounciness;
+	int stickitude;
+	
 	public Player(float x, float y) {
-		super(x, y);
+		super(x, y, false);
 		this.x = x;
 		this.y = y;
 		// TODO Auto-generated constructor stub
+
 	}
-	double density;
-	double bounciness;
-	double stickitude;
-	
-	
 }

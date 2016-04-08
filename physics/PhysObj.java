@@ -1,11 +1,31 @@
 package physics;
 
-import sprite.ScrollingSprite;
+import sprite.Sprite;
 
-public class PhysObj extends ScrollingSprite {
+// 30px = 1m
+// 1period = 2sec
 
-	public PhysObj(float x, float y) {
-		super(x, y);
+public class PhysObj extends Sprite {
+	public float[] rotMatrix;
+	public int mass = 1;
+	public float frecquency = 1/2;
+	public PhysObj(float x, float y, boolean scrolling) {
+		super(x, y, scrolling);
 	}
-
+	
+	// Velocity^2 = Acceleration
+	public int force(int velocity) {
+		return 1/2*this.mass*velocity*velocity;
+	}
+	
+	// -1/2 Kx^2
+	public int spring(int stiffness, int position) {
+		return -1/2 * stiffness * position * position;
+	}
+	
+	
+	public int angularFrec(int omega, int radiusFromOrigin) {
+		return radiusFromOrigin;
+		
+	}
 }

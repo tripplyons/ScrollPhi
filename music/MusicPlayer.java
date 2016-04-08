@@ -13,7 +13,7 @@ import javax.sound.midi.*;
 public class MusicPlayer {
 
 	public static final int NOTE_BITS = 3;
-	public static final int NUM_NOTES = 32;
+	public static final int NUM_NOTES = 256;
 	
 	protected boolean[][] layers;
 	protected int ruleNum;
@@ -133,7 +133,7 @@ public class MusicPlayer {
 	}
     
     public static void main(String[] args) {
-    	new MusicPlayer(63).play();
+    	new MusicPlayer(24).play();
     }
 
 }    
