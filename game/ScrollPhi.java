@@ -27,6 +27,7 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 	static JFrame frame;
 	static int SCREEN_WIDTH = 500;
 	static int SCREEN_HEIGHT = 500;
+	Image playerImage = new ImageIcon("Foot.png").getImage().getScaledInstance(50, 80, Image.SCALE_DEFAULT);          
 	
 	public static void main(String[] args) {
 		frame = new JFrame();
@@ -44,7 +45,7 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 	
 	public ScrollPhi() {
 		loadMap();
-		for(int i = 0; i < map.length; i++) {
+		for(int i = 0; i < 10; i++) {
 		System.out.println(Arrays.toString(map[i]));
 		}
 	}
@@ -52,10 +53,9 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 	public void loadMap() {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("map"));
-			
 			for(int i = 0; br.ready(); i++) {
 				String line = br.readLine();
-				StringTokenizer s = new StringTokenizer(line);
+				StringTokenizer s = new StringTokenizer(line, " ");
 				System.out.println("My line is " + line);
 				for(int j = 0; s.hasMoreTokens(); j++) {
 					map[i][j] = Integer.parseInt(s.nextToken());
@@ -66,7 +66,7 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 			e.printStackTrace();
 		}
 		for(int i = 0; i < 18; i++) {
-			imageKey.put(i, new ImageIcon(Integer.toString(i)).getImage());
+			imageKey.put(i, new ImageIcon("images/"+ i + ".png").getImage());
 		}
 	}
 	
@@ -74,13 +74,13 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 	public void paintComponent(Graphics g) {
 		paintMap(g);
 		paintSprites(g);
-		g.drawImage(new ImageIcon("Foot.png").getImage(),(int)  player.x, (int) player.y, this);
+		g.drawImage(playerImage ,(int)  player.x, (int) player.y, this);
 	}
 	
 	public void paintMap(Graphics g) {
 		for(int i = 0; i < map.length; i++) {
 			for(int j = 0; j < map[i].length; j++) {
-				g.drawImage(imageKey.get(map[i][j]), i*TILESIZE, j*TILESIZE, this);
+				g.drawImage(imageKey.get(map[j][i]), i*TILESIZE, j*TILESIZE, this);
 			}
 		}
 	}
