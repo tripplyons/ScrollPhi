@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 public class Sprite {
 
 	public float x;
-	protected float y;
+	public float y;
 	protected int width;
 	protected int height;
 	protected boolean vis;
@@ -19,7 +19,7 @@ public class Sprite {
 
 	public Sprite(float x, float y, boolean scrolling) {
 		this.x = x;
-		this.y = y;
+		this.setY(y);
 		vis = true;
 		this.scrolling = scrolling;
 	}
@@ -43,7 +43,7 @@ public class Sprite {
 		return x;
 	}
 
-	protected float getY() {
+	public float getY() {
 		return y;
 	}
 
@@ -56,10 +56,14 @@ public class Sprite {
 	}
 
 	protected Rectangle getBounds() {
-		return new Rectangle(Math.round(x), Math.round(y), width, height);
+		return new Rectangle(Math.round(x), Math.round(getY()), width, height);
 	}
 	
 	public void draw(Graphics g, Point offset) {
 		g.drawImage(this.image, offset.x, offset.y, null);
+	}
+
+	public void setY(float y) {
+		this.y = y;
 	}
 }

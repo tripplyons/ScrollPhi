@@ -1,11 +1,14 @@
 package game;
 
+import java.awt.event.KeyEvent;
+
+import javax.swing.SwingUtilities;
+
+import physics.PhysObj;
 import sprite.Sprite;
 
-public class Player extends Sprite {
+public class Player extends PhysObj {
 
-	public float x;
-	public float y;
 	
 	int density;
 	int bounciness;
@@ -13,9 +16,39 @@ public class Player extends Sprite {
 	
 	public Player(float x, float y) {
 		super(x, y, false);
-		this.x = x;
-		this.y = y;
 		// TODO Auto-generated constructor stub
 
+		//SwingUtilities.invokeLater(new runny());
+	}
+
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			 x+=10;
+		} else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			 x-=10;
+		} else if(e.getKeyCode() == KeyEvent.VK_UP) {
+			 
+		} else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+			 
+		}
+		
+	}
+	
+	
+	public class runny implements Runnable {
+
+		@Override
+		public void run() {
+			//y += 9.8;
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			SwingUtilities.invokeLater(new runny());
+			
+		}
+		
 	}
 }

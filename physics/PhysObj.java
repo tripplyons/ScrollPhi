@@ -28,4 +28,11 @@ public class PhysObj extends Sprite {
 		return radiusFromOrigin;
 		
 	}
+	
+	public boolean collidesWithMap(int[][] map) {
+		if(map[(int) x/50][(int) y/50] == 0) {
+			return false;
+		}
+		return true;
+	}
 }
