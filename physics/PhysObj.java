@@ -2,8 +2,8 @@ package physics;
 
 import sprite.Sprite;
 
-// 30px = 1m
-// 1period = 2sec
+// 1 tile = 1m
+// 1period = 1sec
 
 public class PhysObj extends Sprite {
 	public float[] rotMatrix;
