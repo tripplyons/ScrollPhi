@@ -133,7 +133,7 @@ public class MusicPlayer {
 	}
     
     public static void main(String[] args) {
-    	new MusicPlayer(24).play();
+    	new MusicPlayer(222).play();
     }
 
 }    
