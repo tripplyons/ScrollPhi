@@ -1,5 +1,6 @@
 package physics;
 
+import game.ScrollPhi;
 import sprite.Sprite;
 
 // 1 tile = 1m
@@ -31,7 +32,7 @@ public class PhysObj extends Sprite {
 	
 	public boolean collidesWithMap(int[][] map) {
 		System.out.println(x + ", " + y);
-		if(map[(int) x/50][(int) y/50] == 0) {
+		if(map[(int) x/ScrollPhi.TILESIZE][(int) y/ScrollPhi.TILESIZE] == 0) {
 			return false;
 		}
 		System.out.println("Collided with something");
