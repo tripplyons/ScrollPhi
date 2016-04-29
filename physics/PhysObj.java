@@ -31,11 +31,12 @@ public class PhysObj extends Sprite {
 	}
 	
 	public boolean collidesWithMap(int[][] map) {
-		System.out.println(x + ", " + y);
-		if(map[(int) x/ScrollPhi.TILESIZE][(int) y/ScrollPhi.TILESIZE] == 0) {
+//		System.out.println(x + ", " + y);
+		if(map[(int) y/ScrollPhi.TILESIZE][(int) x/ScrollPhi.TILESIZE] == 0) {
 			return false;
 		}
-		System.out.println("Collided with something");
+		System.out.println("TEST");
+//		System.out.println("Collided with something");
 		return true;
 	}
 }
