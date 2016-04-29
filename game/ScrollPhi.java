@@ -49,16 +49,19 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 		frame.addMouseListener(s);
 		frame.setVisible(true);
 		objects.add(player);
+		currentTime = System.currentTimeMillis();
 		while(true) {
 			long current = System.currentTimeMillis();
 			long passed = current - currentTime;
 			
-			long divpassed = passed/1000000000;
 			for(PhysObj p : objects) {
 				if(!p.collidesWithMap(map)) {
 				p.setY((float) (p.getY() + (float) GRAVITY));
 				}
 			}
+			player.update(passed);
+			
+			currentTime = current;
 		}
 	}
 
@@ -151,14 +154,14 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		player.keyPressed(e);
+		player.keyDown(e);
 		repaint();
 
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
+		player.keyReleased(e);
+		repaint();
 	}
 }

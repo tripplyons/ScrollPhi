@@ -9,10 +9,14 @@ import sprite.Sprite;
 
 public class Player extends PhysObj {
 
-	
+	boolean upKeyDown = false;
+	boolean leftKeyDown = false;
+	boolean rightKeyDown = false;
 	int density;
 	int bounciness;
 	int stickitude;
+	int speed = 300;
+	int unused = 0;
 	
 	public Player(float x, float y) {
 		super(x, y, false);
@@ -21,34 +25,38 @@ public class Player extends PhysObj {
 		//SwingUtilities.invokeLater(new runny());
 	}
 
-	public void keyPressed(KeyEvent e) {
+	public void keyDown(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			 x+=10;
+			rightKeyDown = true;
 		} else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			 x-=10;
+			leftKeyDown = true;
 		} else if(e.getKeyCode() == KeyEvent.VK_UP) {
-			 
-		} else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			 
+			upKeyDown = true;
 		}
-		
+	}
+
+	public void keyReleased(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			rightKeyDown = false;
+		} else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			leftKeyDown = false;
+		} else if(e.getKeyCode() == KeyEvent.VK_UP) {
+			upKeyDown = false;
+		}
 	}
 	
-	
-	public class runny implements Runnable {
-
-		@Override
-		public void run() {
-			//y += 9.8;
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	public void update(long passed) {
+		int move = 0;
+		float divpassed = passed / 1000;
+		unused += passed % speed;
+		if (unused > 1000 / speed) {
+			unused -= 1000 / speed;
+			if(rightKeyDown && !leftKeyDown) {
+				x += 1;
 			}
-			SwingUtilities.invokeLater(new runny());
-			
+			if(!rightKeyDown && leftKeyDown) {
+				x -= 1;
+			}
 		}
-		
 	}
 }
