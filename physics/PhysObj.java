@@ -35,7 +35,7 @@ public class PhysObj extends Sprite {
 		if(map[(int) y/ScrollPhi.TILESIZE][(int) x/ScrollPhi.TILESIZE] == 0) {
 			return false;
 		}
-		System.out.println("TEST");
+//		System.out.println("TEST");
 //		System.out.println("Collided with something");
 		return true;
 	}
