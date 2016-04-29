@@ -27,7 +27,7 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 	static int[][] map = new int[1000][1000];
 	static Player player;
 	HashMap<Integer, Image> imageKey = new HashMap<Integer, Image>();
-	int TILESIZE = 50;
+	int TILESIZE = 128;
 	static JFrame frame;
 	static int SCREEN_WIDTH = 500;
 	static int SCREEN_HEIGHT = 500;
@@ -56,7 +56,7 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 			long divpassed = passed/1000000000;
 			for(PhysObj p : objects) {
 				if(!p.collidesWithMap(map)) {
-				p.setY((float) (p.getY() - (float) GRAVITY));
+				p.setY((float) (p.getY() + (float) GRAVITY));
 				}
 			}
 		}

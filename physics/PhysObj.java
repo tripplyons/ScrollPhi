@@ -30,9 +30,11 @@ public class PhysObj extends Sprite {
 	}
 	
 	public boolean collidesWithMap(int[][] map) {
+		System.out.println(x + ", " + y);
 		if(map[(int) x/50][(int) y/50] == 0) {
 			return false;
 		}
+		System.out.println("Collided with something");
 		return true;
 	}
 }
