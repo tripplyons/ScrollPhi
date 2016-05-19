@@ -59,4 +59,12 @@ public class Player extends PhysObj {
 			}
 		}
 	}
+	
+	@Override
+	public boolean collidesWithMap(int[][] map) {
+		if(map[(int) 300/ScrollPhi.TILESIZE -(int) y/ScrollPhi.TILESIZE + height][(int) 500/ScrollPhi.TILESIZE - (int) y/ScrollPhi.TILESIZE] == 0) {
+		return false;
+		} 
+		return true;
+	}
 }

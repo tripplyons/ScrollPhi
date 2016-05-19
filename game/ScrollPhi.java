@@ -39,7 +39,7 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 	public static void main(String[] args) {
 		frame = new JFrame();
 		ScrollPhi s = new ScrollPhi();
-		player = new Player(50f, 50f);
+		player = new Player(0f, 0f);
 		frame.add(s);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -101,13 +101,13 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 	public void paintComponent(Graphics g) {
 		paintMap(g);
 		paintSprites(g);
-		g.drawImage(playerImage ,(int)  player.x, (int) player.y, this);
+		g.drawImage(playerImage ,(int)  500, (int) 300, this);
 	}
 
 	public void paintMap(Graphics g) {
 		for(int i = 0; i < map.length; i++) {
 			for(int j = 0; j < map[i].length; j++) {
-				g.drawImage(imageKey.get(map[j][i]), i*TILESIZE, j*TILESIZE, this);
+				g.drawImage(imageKey.get(map[j][i]), i*TILESIZE - (int) player.x, j*TILESIZE - (int) player.y + 350, this);
 			}
 		}
 	}
