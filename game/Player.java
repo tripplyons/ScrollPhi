@@ -47,16 +47,21 @@ public class Player extends PhysObj {
 	
 	public void update(long passed) {
 		int move = 0;
-		float divpassed = passed / 1000;
-		unused += passed % speed;
-		if (unused > 1000 / speed) {
-			unused -= 1000 / speed;
+		unused += passed;
+		float before = x;
+		if (unused > 1000/speed) {
+			unused -= 1000/speed;
 			if(rightKeyDown && !leftKeyDown) {
 				x += 1;
 			}
 			if(!rightKeyDown && leftKeyDown) {
 				x -= 1;
 			}
+		}
+		if(x - before == 0) {
+			System.out.print(".");
+		} else {
+			System.out.println(x - before);
 		}
 	}
 	
