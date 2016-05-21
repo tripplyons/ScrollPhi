@@ -109,7 +109,7 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 	public void paintMap(Graphics g) {
 		for(int i = 0; i < map.length; i++) {
 			for(int j = 0; j < map[i].length; j++) {
-				g.drawImage(imageKey.get(map[j][i]), i*TILESIZE - (int) player.x + 575, j*TILESIZE - (int) player.y + 575, this);
+				g.drawImage(imageKey.get(map[j][i]), i*TILESIZE - (int) player.x + 375, j*TILESIZE - (int) player.y + 375, this);
 			}
 		}
 	}
