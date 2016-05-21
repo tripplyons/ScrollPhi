@@ -3,7 +3,7 @@ package physics;
 import game.ScrollPhi;
 import sprite.Sprite;
 
-// 1 tile = 1m
+// 1 tile = 1meter
 // 1period = 1sec
 
 public class PhysObj extends Sprite {
