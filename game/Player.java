@@ -18,10 +18,10 @@ public class Player extends PhysObj {
 	int speed = 300;
 	int unused = 0;
 	
-	public Player(float x, float y) {
+	public Player(double x, double y) {
 		super(x, y, false);
 		// TODO Auto-generated constructor stub
-
+//hi
 		//SwingUtilities.invokeLater(new runny());
 	}
 
@@ -48,7 +48,7 @@ public class Player extends PhysObj {
 	public void update(long passed) {
 		int move = 0;
 		unused += passed;
-		float before = x;
+		double before = x;
 		if (unused > 1000/speed) {
 			unused -= 1000/speed;
 			if(rightKeyDown && !leftKeyDown) {
@@ -59,17 +59,8 @@ public class Player extends PhysObj {
 			}
 		}
 		if(x - before == 0) {
-			System.out.print(".");
 		} else {
-			System.out.println(x - before);
 		}
 	}
 	
-	@Override
-	public boolean collidesWithMap(int[][] map) {
-		if(map[(int) 300/ScrollPhi.TILESIZE -(int) y/ScrollPhi.TILESIZE + height][(int) 500/ScrollPhi.TILESIZE - (int) y/ScrollPhi.TILESIZE] == 0) {
-		return false;
-		} 
-		return true;
-	}
 }

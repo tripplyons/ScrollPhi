@@ -55,8 +55,11 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 			long passed = current - currentTime;
 			
 			for(PhysObj p : objects) {
-				if(!p.collidesWithMap(map)) {
-				p.setY((float) (p.getY() + (float) GRAVITY));
+				if(! p.collidesWithMap(map)) {
+				double k = p.getY() + GRAVITY;
+				System.out.println(p.y);
+				System.out.println("K is " + k);
+				p.setY(k);
 				}
 			}
 			player.update(passed);
@@ -68,7 +71,6 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 	public ScrollPhi() {
 		loadMap();
 		for(int i = 0; i < 10; i++) {
-			System.out.println(Arrays.toString(map[i]));
 		}
 
 		
@@ -107,7 +109,7 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 	public void paintMap(Graphics g) {
 		for(int i = 0; i < map.length; i++) {
 			for(int j = 0; j < map[i].length; j++) {
-				g.drawImage(imageKey.get(map[j][i]), i*TILESIZE - (int) player.x, j*TILESIZE - (int) player.y + 350, this);
+				g.drawImage(imageKey.get(map[j][i]), i*TILESIZE - (int) player.x + 575, j*TILESIZE - (int) player.y + 575, this);
 			}
 		}
 	}

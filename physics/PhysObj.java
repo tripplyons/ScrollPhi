@@ -7,10 +7,10 @@ import sprite.Sprite;
 // 1period = 1sec
 
 public class PhysObj extends Sprite {
-	public float[] rotMatrix;
+	public double[] rotMatrix;
 	public int mass = 1;
-	public float frecquency = 1/2;
-	public PhysObj(float x, float y, boolean scrolling) {
+	public double frecquency = 1/2;
+	public PhysObj(double x, double y, boolean scrolling) {
 		super(x, y, scrolling);
 	}
 	
