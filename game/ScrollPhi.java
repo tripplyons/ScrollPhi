@@ -48,7 +48,6 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 		frame.addKeyListener(s);
 		frame.addMouseListener(s);
 		frame.setVisible(true);
-		objects.add(player);
 		currentTime = System.currentTimeMillis();
 		while(true) {
 			long current = System.currentTimeMillis();
@@ -61,6 +60,13 @@ public class ScrollPhi extends JPanel implements KeyListener, MouseListener {
 				System.out.println("K is " + k);
 				p.setY(k);
 				}
+				p.update(passed);
+			}
+			if(! player.collidesWithMap(map)) {
+			double k = player.getY() + GRAVITY;
+			System.out.println(player.y);
+			System.out.println("K is " + k);
+			player.setY(k);
 			}
 			player.update(passed);
 			

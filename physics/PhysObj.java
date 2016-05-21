@@ -37,4 +37,8 @@ public class PhysObj extends Sprite {
 		}
 		return true;
 	}
+
+	public void update(long passed) {
+		
+	}
 }
